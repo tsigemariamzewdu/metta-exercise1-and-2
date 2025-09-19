@@ -1,9 +1,4 @@
 ;exercise 1 -represent a given family tree in atomspace
-
-;define gender
-(:male (-> Atom));male
-(:female(->Atom));female
-
 ;define male members in the family tree
 (male Chandler)
 (male John)
@@ -17,9 +12,6 @@
 (female Jane)
 (female Kim)
 (female Eve)
-
-;define links between nodes
-(:parent(-> Atom Atom)); parent(a,b) will be read as a is a parent of b
 
 ;represent the links
 (parent Chandler John)
@@ -46,48 +38,39 @@
 ;exercise 2-implementing match queries for the family tree atomspace
 
 ;get parents of John
-(match &family 
+!(match &family 
     (parent $p John) 
 $p)
 
 ;get the mother of Pam
-(match &family 
-    (and(parent $m Pam)
+!(match &family 
+    (,(parent $m Pam)
     (female $m))
 $m)
 
 ;get the siblings of Pam
-(match &family
-    (and (parent $p pam)
+!(match &family
+    (, (parent $p pam)
     (parent $p $s)
-    (not(==$s Pam)))
+    
 $s)
 
 ;get the uncles of Tim
-(match &family 
-    (and (parent $p Tim)
+!(match &family 
+    (, (parent $p Tim)
     (parent $gp $p)
-    (parent $gp $u
-    )(not(== $u $p)
+    (parent $gp $u)
     (male $u)))
 $u)
 
 ;get the nephews of John
-(match &family
-    (and (parent $p John)
+!(match &family
+    (, (parent $p John)
     (parent $p $s)
-    (not(==$s John))
     (parent $s $n)
     (male $n))
 $n)
 
 ;get all predecessors of Bob
-(:ancestor (->Atom Atom)) ;ancestor(a,b) will be read as a is ancestor of b
 
-(=(ancestor $x $y))(parent $x $y)
-(=(ancestor $x $y)(and (parent $x $z)(ancestor $z $y)))
 
-;query all ancestors of Bob
-(match &familly 
-    (ancestor $a Bob)
-$a)
