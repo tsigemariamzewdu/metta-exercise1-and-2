@@ -38,25 +38,25 @@
 ;exercise 2-implementing match queries for the family tree atomspace
 
 ;get parents of John
-!(match &family 
+!(match &self 
     (parent $p John) 
 $p)
 
 ;get the mother of Pam
-!(match &family 
+!(match &self 
     (,(parent $m Pam)
     (female $m))
 $m)
 
 ;get the siblings of Pam
-!(match &family
+!(match &self
     (, (parent $p pam)
     (parent $p $s)
     
 $s)
 
 ;get the uncles of Tim
-!(match &family 
+!(match &self 
     (, (parent $p Tim)
     (parent $gp $p)
     (parent $gp $u)
@@ -64,7 +64,7 @@ $s)
 $u)
 
 ;get the nephews of John
-!(match &family
+!(match &self
     (, (parent $p John)
     (parent $p $s)
     (parent $s $n)
@@ -72,5 +72,6 @@ $u)
 $n)
 
 ;get all predecessors of Bob
+
 
 
