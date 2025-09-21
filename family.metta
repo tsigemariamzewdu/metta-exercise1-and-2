@@ -75,4 +75,10 @@ $s))
 $n))
 
 ;get all predecessors of Bob
+(= (parent $x $y) (match &self (parent $x $y) $x))
+(= (predecessor $x $z) (parent $x $z))
+(= (predecessor $x $z) (predecessor $x (parent $y $z)))
+
+! (predecessor $x Bob)
+
 
