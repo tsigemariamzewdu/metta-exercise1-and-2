@@ -14,7 +14,6 @@
 (female Eve)
 
 ;define parent  links 
-
 (parent Chandler John)
 (parent Monica   John)
 
@@ -49,13 +48,14 @@
     (female $m))
 $m))
 
-;get the siblings of Pam
 !(unique(match &self 
     (,(parent $p Pam)
     (parent $p $s)
-    
    )
-$s))
+   (if (== $s Pam) (empty) $s) 
+
+  ))
+
 
 ;get the uncles of Tim
 !(unique(match &self 
@@ -63,7 +63,8 @@ $s))
     (parent $gp $p)
     (parent $gp $u)
     (male $u))
-    $u
+    (if (== $u Tim) (empty) $u)
+    
 ))
 
 ;get the nephews of John
@@ -72,13 +73,12 @@ $s))
     (parent $p $s)
     (parent $s $n)
     (male $n))
-$n))
+    (if (== $n John) (empty)$n)
+))
 
-;get all predecessors of Bob
+;get all the predecessor of Bob
 (= (parent $x $y) (match &self (parent $x $y) $x))
 (= (predecessor $x $z) (parent $x $z))
 (= (predecessor $x $z) (predecessor $x (parent $y $z)))
 
 ! (predecessor $x Bob)
-
-
