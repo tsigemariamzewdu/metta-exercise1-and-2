@@ -1,5 +1,6 @@
 ;exercise 1 -represent a given family tree in atomspace
 
+
 (male Chandler)
 (male John)
 (male Adam)
@@ -76,9 +77,15 @@ $m))
     (if (== $n John) (empty)$n)
 ))
 
+; i belive this is where the comment araises from so the way that i implemented now for the predesc
 ;get all the predecessor of Bob
 (= (parent $x $y) (match &self (parent $x $y) $x))
 (= (predecessor $x $z) (parent $x $z))
 (= (predecessor $x $z) (predecessor $x (parent $y $z)))
 
 ! (predecessor $x Bob)
+
+
+;;progess so far one comment is fixed 
+;lets go fix another one 
+; so yeah the comment goes like rather that using standard library you can use conditional statements no idea so esti lets move to the harder part

@@ -57,11 +57,12 @@
 ;post-order(left,right,value)
 (=(postorder nil) Nil)
 (=(postorder (node $v $l $r))
-(append(inorder $l) (append(postorder $r)(Cons $v Nil))))
+(append(postorder $l) (append(postorder $r)(Cons $v Nil))))
 
 !(postorder(node 10(node 5 nil nil)(node 15 nil nil)))
 
 ;bst (binary search tree) operations 
+
 ;-insert in to bst
 (=(insert $x nil) (node $x nil nil))
 (=(insert $x (node $v $l $r))
@@ -70,4 +71,41 @@
 ))
 
 !(insert 4 (node 5 (node 1 nil nil)(node 7 nil nil)))
-    
+
+;search in bst
+(=(search $x nil) False)
+(=(search $x (node $v $l $r))
+    (if(== $x $v) True 
+(if (< $x $v)
+(search $x $l)
+(search $x $r))))
+
+!(search 4 (node 5 (node 1 nil (node 4 nil nil)) (node 7 nil nil)))
+
+;delete in bst
+
+; we need a helper function to find  the inorder successor(minimun value in the right subtree)
+
+(=(bst-min (node $v nil $r) ) $v)
+(=(bst-min (node $v $l $r)) (bst-min $l))
+
+(=(delete $x nil) nil)
+(=(delete $x (node $v $l $r))
+    (if (< $x $v)
+        (node $v (delete $x $l) $r)
+        (if (> $x $v)
+            (node $v $l (delete $x $r))
+            (if (== $l nil)
+                $r
+                (if (== $r nil)
+                    $l
+                    (let $min (bst-min $r)
+                        (node $min $l (delete $min $r))
+                    )
+                )
+            )
+        )
+    )
+)
+
+!(delete 4 (node 5 (node 1 nil (node 4 nil nil)) (node 7 nil nil)))
