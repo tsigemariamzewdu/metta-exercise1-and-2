@@ -61,4 +61,13 @@
 
 !(postorder(node 10(node 5 nil nil)(node 15 nil nil)))
 
-;
+;bst (binary search tree) operations 
+;-insert in to bst
+(=(insert $x nil) (node $x nil nil))
+(=(insert $x (node $v $l $r))
+    (if (<= $x $v)(node $v (insert $x $l) $r)
+    (node $v $l (insert $x $r))
+))
+
+!(insert 4 (node 5 (node 1 nil nil)(node 7 nil nil)))
+    
