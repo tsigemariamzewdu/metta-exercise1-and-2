@@ -77,7 +77,7 @@ $m))
     (if (== $n John) (empty)$n)
 ))
 
-; i belive this is where the comment araises from so the way that i implemented now for the predesc
+
 ;get all the predecessor of Bob
 (= (parent $x $y) (match &self (parent $x $y) $x))
 (= (predecessor $x $z) (parent $x $z))
@@ -86,6 +86,5 @@ $m))
 ! (predecessor $x Bob)
 
 
-;;progess so far one comment is fixed 
-;lets go fix another one 
-; so yeah the comment goes like rather that using standard library you can use conditional statements no idea so esti lets move to the harder part
+
+
