@@ -40,14 +40,14 @@
 
 
 ;get parents of John
-!(unique(match &self 
-    (parent $p John) $p))
+!(match &self 
+    (parent $p John) $p)
 
 ;get the mother of Pam
-!(unique(match &self 
+!(match &self 
     (,(parent $m Pam)
     (female $m))
-$m))
+$m)
 
 !(unique(match &self 
     (,(parent $p Pam)
@@ -84,7 +84,5 @@ $m))
 (= (predecessor $x $z) (predecessor $x (parent $y $z)))
 
 ! (predecessor $x Bob)
-
-
 
 
