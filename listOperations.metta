@@ -59,14 +59,11 @@
 
 ;push-the same as append 
 
-;pop
-(=(pop $x Nil) Nil)
-(=(pop $x (Cons $x $xs)) $xs)
-(=(pop $x (Cons $y $ys)) (Cons $y (pop $x $ys)))
-!(pop 3 (Cons 4 (Cons 3 Nil)))
-
-
-
+;pop  the last entry
+(=(pop  Nil) Nil)
+(=(pop (Cons $x $xs))
+(if (== $xs Nil) Nil (Cons $x (pop $xs))))
+!(pop (Cons 4 (Cons 3 Nil)))
 
 ;remove-element
 
