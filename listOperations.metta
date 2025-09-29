@@ -57,7 +57,7 @@
             $min-rest)))
 !(min-value (Cons 3 (Cons 1 (Cons 4 (Cons 2 Nil)))))
 
-;push-the same as append 
+;push-same as append 
 
 ;pop  the last entry
 (=(pop  Nil) Nil)
@@ -66,12 +66,52 @@
 !(pop (Cons 4 (Cons 3 Nil)))
 
 ;remove-element
-
-
+(=(remove-element $x Nil) Nil)
+(=(remove-element $x (Cons $y $ys))
+(if (== $x $y) $ys ( Cons $y (remove-element $x $ys))))
+!(remove-element 3 (Cons 4 (Cons 3 Nil)))
 
 ;remove-duplicate
+(=(remove-duplicate Nil) Nil)
+(=(remove-duplicate (Cons $x $xs))
+(if (is-member $x $xs) (remove-duplicate $xs) (Cons $x (remove-duplicate $xs))))
+!(remove-duplicate (Cons 3 (Cons 1 (Cons 3 (Cons 2 Nil)))))
+
+;map -takes function and list
+(=(map $func Nil) Nil)
+(=(map $func (Cons $x $xs)) (Cons ($func $x) (map $func $xs)))
+
+(=(square $n) (* $n $n))
+!(map square (Cons 1 (Cons 2 (Cons 3 Nil))))
+
+;filter
+
+(=(filter $func Nil) Nil)
+(=(filter $func (Cons $x $xs))
+    (if ($func $x) (Cons $x (filter $func $xs)) (filter $func $xs)))
+
+(=(is-even $n) (if (== 0 (% $n 2))True False))
+!(is-even 3)
+!(filter is-even (Cons 1 (Cons 2 (Cons 3 Nil))))
+
+;sort
+
+;helper function insert- to insert in sorted list
+(=(insert $x Nil) (Cons $x Nil))
+(=(insert $x (Cons $y $ys)) (if (<= $x $y) (Cons $x (Cons $y $ys)) (Cons $y (insert $x $ys))))
+
+(=(sort Nil) Nil)
+(=(sort (Cons $x $xs))(insert $x (sort $xs)))
+
+!(sort (Cons 4 (Cons 3 Nil)))
+
+;reverse
+(=(reverse Nil) Nil)
+(=(reverse (Cons $x $xs))
+(append (reverse $xs) (Cons $x Nil)))
+
+!(reverse (Cons 4 (Cons 3 Nil)))
 
 
 
 
-;map
