@@ -43,7 +43,3 @@
 
 
 !(findAndReplace 2  5 (1 2 3 4))
-
-; -  I think if you use a helper function of you own to check the elements (similar to how isMember function work) both findAndReplace and  findAndRemove would work fine. And you don't need to superpose $n as it's just a single number not a tuple.
-
-; - After you finish deconstructing your tuple and do some function operation on them the result should be a tuple not an ND list. this is for all you functions.
