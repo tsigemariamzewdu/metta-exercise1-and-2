@@ -6,7 +6,6 @@
 
 
 ;map -takes function and list
-(=(map $func Nil) Nil)
 
 (=(map $func $list)
   ( $func (superpose $list)))
@@ -24,15 +23,25 @@
 (=(is-even $n) (if (== 0 (% $n 2))True False))
 !( filter is-even (1 2 3 4 5)) 
 
-! (== 2 collapse(car-atom(2 2)))
+! (superpose((cdr-atom(1 2 3))))
+; !(car-atom (superpose(1 2 3)))
 
 ;find and remove
-(=(findAndRemove $n $list))
+(=(findAndRemove $n $list)
+    (if (== (superpose($n))  (car-atom $list))
+        (cdr-atom $list)
+        ( superpose ((car-atom $list ) (findAndRemove $n (cdr-atom $list))))))
 
 
-
-
+!(findAndRemove 4 (1 2 3 4))
 
 ;find and replace 
+(=(findAndReplace $n $x $list)
+    (if (== (superpose($n))  (car-atom $list))
+        (superpose ($x (cdr-atom $list)))
+        ( superpose ((car-atom $list ) (findAndReplace $n $x (cdr-atom $list))))))
+
+
+!(findAndReplace 2  5 (1 2 3 4))
 
 
