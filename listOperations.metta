@@ -1,9 +1,10 @@
 ;list implementation with head tail and append
-(:List type)
-(:Nil List)
-(:Cons (-> Number List List))
+(: List type)
+(: Nil List)
+(: Cons (-> Number List List))
 
-;!(Cons 1(Cons 2(Cons 3 Nil)))
+
+!(get-type (Cons 1( Cons 2 Nil)))
 ;find head
 (=(head Nil) Nil)
 (=(head (Cons $x $xs)) $x)
@@ -12,13 +13,15 @@
 (=(tail Nil) Nil)
 (=(tail (Cons $x $xs)) $xs)
 
-; !(tail(Cons 1(Cons 2(Cons 3 Nil))))
+!(tail(Cons 1(Cons 2(Cons 3 Nil))))
 
 ;length
 (=(length Nil) 0)
 (=(length (Cons $x $xs)) (+ 1 (length $xs)))
 
-;  !(length (Cons 1(Cons 2(Cons 3 Nil))))
+!(length (Cons 1(Cons 2(Cons 3 Nil))))
+
+(: is-member (-> Number List Bool))
 
 (=(is-member $x Nil) False)
 (=(is-member $x (Cons $y $ys))
@@ -26,13 +29,13 @@
         True
         (is-member $x $ys)))
 ;!(is-member "abebe" (Cons 1 (Cons 2 (Cons 3 Nil)))) 
-;!(is-member 5 (Cons 1 (Cons 2 (Cons 3 Nil))))
+!(is-member 5 (Cons 1 (Cons 2 (Cons 3 Nil))))
 
 ;append 
 (=(append Nil $ys)$ys)
 (=(append (Cons $x $xs) $ys)
 (Cons $x (append $xs $ys)))
-; !(append (Cons 1 (Cons 2 (Cons 3 Nil))) (Cons 4 Nil))
+ !(append (Cons 1 (Cons 2 (Cons 3 Nil))) (Cons 4 Nil))
 
 ; max-value
 (=(max-value Nil) -999999) ; default for empty list
@@ -43,7 +46,7 @@
             $x
             $max-rest))))
 
-; !(max-value (Cons 3 (Cons 1 (Cons 8 (Cons 2 Nil)))))
+!(max-value (Cons 3 (Cons 1 (Cons 8 (Cons 2 Nil)))))
 
 ;min-value
 (=(min-value Nil) 999999);default for empty list
@@ -54,10 +57,8 @@
         (if (< $x $min-rest) 
             $x 
             $min-rest))))
-; !(min-value (Cons 3 (Cons 1 (Cons 4 (Cons 2 Nil)))))
-
+ !(min-value (Cons 3 (Cons 1 (Cons 4 (Cons 2 Nil)))))
 ;push-same as append 
-
 
 ;pop  the last entry
 (=(pop  Nil) Nil)
@@ -71,20 +72,20 @@
 (=(remove-element $x Nil) Nil)
 (=(remove-element $x (Cons $y $ys))
 (if (== $x $y) $ys ( Cons $y (remove-element $x $ys))))
-; !(remove-element 3 (Cons 4 (Cons 3 Nil)))
+ !(remove-element 3 (Cons 4 (Cons 3 Nil)))
 
 ;remove-duplicate
 (=(remove-duplicate Nil) Nil)
 (=(remove-duplicate (Cons $x $xs))
 (if (is-member $x $xs) (remove-duplicate $xs) (Cons $x (remove-duplicate $xs))))
-; !(remove-duplicate (Cons 3 (Cons 1 (Cons 3 (Cons 2 Nil)))))
+ !(remove-duplicate (Cons 3 (Cons 1 (Cons 3 (Cons 2 Nil)))))
 
 ;map -takes function and list
 (=(map $func Nil) Nil)
 (=(map $func (Cons $x $xs)) (Cons ($func $x) (map $func $xs)))
 
 (=(square $n) (* $n $n))
-; !(map square (Cons 1 (Cons 2 (Cons 3 Nil))))
+ !(map square (Cons 1 (Cons 2 (Cons 3 Nil))))
 
 ;filter
 
@@ -94,7 +95,7 @@
 
 (=(is-even $n) (if (== 0 (% $n 2))True False))
 ;!(is-even 3)
-; !(filter is-even (Cons 1 (Cons 2 (Cons 3 Nil))))
+!(filter is-even (Cons 1 (Cons 2 (Cons 3 Nil))))
 
 ;sort
 
@@ -112,7 +113,5 @@
 (=(reverse (Cons $x $xs))
 (append (reverse $xs) (Cons $x Nil)))
 
-; !(reverse (Cons 4 (Cons 3 Nil)))
+ !(reverse (Cons 4 (Cons 3 Nil)))
 
-; - isMember function crashes when given an element of another datatype
-; - pop should return both the popped element and the remaining list
