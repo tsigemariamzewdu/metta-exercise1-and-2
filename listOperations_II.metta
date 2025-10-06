@@ -6,12 +6,15 @@
 
 
 ;map -takes function and list
+(: map (-> (-> Number Number) Atom Atom ))
 
 (=(map $func $list)
   ( collapse($func (superpose $list))))
 
 (=(square $n) (* $n $n))
 !(map square (1 2 3 4 5))
+
+(: filter (-> (-> Number Bool) Atom Atom))
 
 ;filter-takes function and list
 (= (filter $func $list)
@@ -22,9 +25,7 @@
 (=(is-even $n) (if (== 0 (% $n 2))True False))
 !( filter is-even (1 2 3 4 5)) 
 
-! (superpose((cdr-atom(1 2 3))))
-; !(car-atom (superpose(1 2 3)))
-
+(: findAndRemove (-> Number Atom Atom))
 ;find and remove
 (= (findAndRemove $n $list)
    (collapse
@@ -34,6 +35,7 @@
 
 !(findAndRemove 4 (1 2 3 4))
 
+(: findAndReplace (-> Number Number Atom Atom))
 ;find and replace 
 (= (findAndReplace $n $x $list)
    (collapse
@@ -43,3 +45,4 @@
 
 
 !(findAndReplace 2  5 (1 2 3 4))
+;!(get-type (collapse( 1 2 3 4 5)))
